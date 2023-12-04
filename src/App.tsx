@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import BookList from './components/Booklist/Booklist';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import BookDetails from './components/BookDetails/BookDetails';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Favorites from './components/Favourites';
+
+const theme = createTheme({
+
+  palette: {
+    primary: {
+      main: '#556cd6',
+    },
+  },
+
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <ThemeProvider theme={theme}>
+    <Router>
+
+      <Routes>
+      <Route path="/" element={<BookList />} />
+    <Route path="/book/:id" element={<BookDetails />} />
+    <Route path="/favorites" element={<Favorites />} />
+      </Routes>
+    </Router>
+  </ThemeProvider>
   );
 }
 
