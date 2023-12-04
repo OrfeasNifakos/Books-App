@@ -32,20 +32,19 @@ const BookList: React.FC = () => {
       setError("");
 
       try {
-        // Construct the URL with the search term and pagination details
         const url = `https://gutendex.com/books/`;
         const params = {
           search: searchTerm,
           page: currentPage,
-          pageSize: booksPerPage, // Assuming you've defined this variable earlier
+          pageSize: booksPerPage, 
         };
 
         const response = await axios.get<GutenbergApiResponse>(url, { params });
 
         if (response.data && response.data.results) {
           setBooks(response.data.results);
-          // Calculate the total number of pages
-          const totalItems = response.data.count; // assuming the API returns the count in a 'count' key
+          
+          const totalItems = response.data.count; 
           setTotalPages(Math.ceil(totalItems / booksPerPage));
         } else {
           setError("The API response does not contain the 'results' key.");
@@ -63,7 +62,7 @@ const BookList: React.FC = () => {
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
-    setCurrentPage(1); // Reset to the first page for new searches
+    setCurrentPage(1); 
   };
 
   const handlePageChange = (
@@ -123,13 +122,12 @@ const BookList: React.FC = () => {
                   <Typography color="textSecondary">
                     by {book.authors.map((author) => author.name).join(", ")}
                   </Typography>
-                  {/* Include other book details you wish to show */}
                 </CardContent>
                 <CardActions>
                   <Button
                     size="small"
                     component={Link}
-                    to={`/book/${book.id}`} // Assuming you're using React Router for navigation
+                    to={`/book/${book.id}`}
                   >
                     View Details
                   </Button>

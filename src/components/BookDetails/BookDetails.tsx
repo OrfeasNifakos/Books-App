@@ -14,12 +14,12 @@ import {
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Book } from "../../types/book"; // Ensure you import the Book interface
+import { Book } from "../../types/book"; 
 import ListIcon from "@mui/icons-material/List";
 
 const BookDetails = () => {
   const [bookDetails, setBookDetails] = useState<Book | null>(null);
-  const { id } = useParams<{ id: string }>(); // Ensure you are typing the useParams hook correctly
+  const { id } = useParams<{ id: string }>(); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,7 +31,6 @@ const BookDetails = () => {
         setBookDetails(response.data);
       } catch (error) {
         console.error("Error fetching book details:", error);
-        // Handle error state as well
       }
     };
 
@@ -39,16 +38,13 @@ const BookDetails = () => {
   }, [id]);
 
   const addToFavorites = () => {
-    // First, ensure that bookDetails is not null
     if (bookDetails) {
       const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
       if (!favorites.includes(bookDetails.id)) {
         favorites.push(bookDetails.id);
         localStorage.setItem("favorites", JSON.stringify(favorites));
-        // Add any additional UI updates or notifications here
       }
     } else {
-      // Handle the case where bookDetails is null, such as showing an error message
       console.error("No book details available to add to favorites.");
     }
   };
